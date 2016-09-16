@@ -383,7 +383,7 @@
     var editor;
 
     // don't use JSON-LD for PEM data
-    if(key === 'privatekey') {
+    if(key === 'privatekey' || key === 'publickey') {
       editor = CodeMirror.fromTextArea(node, {
         matchBrackets: true,
         autoCloseBrackets: true,
@@ -771,7 +771,7 @@
 
 
   /**
-   * Returns a Promise to performs the JSON-LD API action based on the active
+   * Returns a Promise to perform the JSON-LD API action based on the active
    * tab.
    *
    * @param input the JSON-LD object input or null no error.
@@ -812,7 +812,6 @@
     else if(playground.activeTab === 'tab-signed') {
       options.format = 'application/ld+json';
 
-      var jsigs = window.jsigs;
       var pkey = playground.editors.privatekey.getValue();
 
       // add security context to input
@@ -826,11 +825,11 @@
       }
 
       promise = jsigs.promises.sign(input, {
-        privateKeyPem: pkey,
-        algorithm: 'LinkedDataSignature2015',
+        privateKeyWif: pkey,
+        algorithm: 'BitcoinSignature2016',
         nonce: forge.util.bytesToHex(forge.random.getBytesSync(4)),
         domain: 'json-ld.org',
-        creator: 'https://example.com/jdoe/keys/1'
+        creator: 'bitcoin-key:' + playground.editors.publickey.getValue()
       });
     }
     else {
@@ -1174,7 +1173,7 @@
         hasData = true;
         editor.setValue(playground.humanize(data[key]));
       }else{
-        if(key !== 'privatekey') {
+        if(key !== 'privatekey' && key !== 'publickey') {
           editor.setValue("{}");
         }
       }
