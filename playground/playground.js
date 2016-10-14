@@ -827,9 +827,9 @@
       promise = jsigs.promises.sign(input, {
         privateKeyWif: pkey,
         algorithm: 'sha256-ecdsa-secp256k1-2016',
-        nonce: forge.util.bytesToHex(forge.random.getBytesSync(4)),
-        domain: 'json-ld.org',
-        creator: 'sha256-ecdsa-secp256k1-public-key:[TODO EXTRACT PUBLIC KEY FROM SIGNATURE]'
+        // nonce: forge.util.bytesToHex(forge.random.getBytesSync(4)),
+        domain: 'example.com',
+        creator: 'sha256-ecdsa-secp256k1-public-key:' + new bitcoreMessage.Bitcore.PrivateKey(pkey).toPublicKey()
       });
     }
     else {
