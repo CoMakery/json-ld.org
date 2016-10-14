@@ -826,7 +826,7 @@
 
       promise = jsigs.promises.sign(input, {
         privateKeyWif: pkey,
-        algorithm: 'BitcoinSignature2016',
+        algorithm: 'sha256-ecdsa-secp256k1-2016',
         nonce: forge.util.bytesToHex(forge.random.getBytesSync(4)),
         domain: 'json-ld.org',
         creator: 'sha256-ecdsa-secp256k1-public-key:[TODO EXTRACT PUBLIC KEY FROM SIGNATURE]'
