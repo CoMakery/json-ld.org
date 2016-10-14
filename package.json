@@ -1,0 +1,11 @@
+{
+  "name": "json-ld-playground",
+  "version": "0.0.0",
+  "description": "THIS FILE IS TEMPORARY, for heroku deploy of fork in progress",
+  "scripts": {
+    "start": "harp server --port $PORT"
+  },
+  "dependencies": {
+    "harp": "*"
+  }
+}
