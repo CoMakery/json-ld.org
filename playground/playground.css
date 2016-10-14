@@ -73,7 +73,3 @@
 #markup-container, #output-container {
   margin-top: 1em;
 }
-
-#privatekey-div .CodeMirror {
-  height: 100px;
-}

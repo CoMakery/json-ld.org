@@ -383,7 +383,7 @@
     var editor;
 
     // don't use JSON-LD for PEM data
-    if(key === 'privatekey' || key === 'publickey') {
+    if(key === 'privatekey') {
       editor = CodeMirror.fromTextArea(node, {
         matchBrackets: true,
         autoCloseBrackets: true,
@@ -829,7 +829,7 @@
         algorithm: 'BitcoinSignature2016',
         nonce: forge.util.bytesToHex(forge.random.getBytesSync(4)),
         domain: 'json-ld.org',
-        creator: 'bitcoin-key:' + playground.editors.publickey.getValue()
+        creator: 'sha256-ecdsa-secp256k1-public-key:[TODO EXTRACT PUBLIC KEY FROM SIGNATURE]'
       });
     }
     else {
@@ -1173,7 +1173,7 @@
         hasData = true;
         editor.setValue(playground.humanize(data[key]));
       }else{
-        if(key !== 'privatekey' && key !== 'publickey') {
+        if(key !== 'privatekey') {
           editor.setValue("{}");
         }
       }
