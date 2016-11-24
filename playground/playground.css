@@ -73,3 +73,7 @@
 #markup-container, #output-container {
   margin-top: 1em;
 }
+
+#privatekey-secp256k1-div .CodeMirror {
+  height: 100px;
+}

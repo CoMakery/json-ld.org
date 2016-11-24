@@ -383,7 +383,8 @@
     var editor;
 
     // don't use JSON-LD for PEM data
-    if(key === 'privatekey-rsa' || key === 'privatekey-secp256k1') {
+    if(key === 'privatekey-rsa' || key === 'privatekey-secp256k1' ||
+            key === 'publickey-secp256k1') {
       editor = CodeMirror.fromTextArea(node, {
         matchBrackets: true,
         autoCloseBrackets: true,
@@ -1202,7 +1203,8 @@
         hasData = true;
         editor.setValue(playground.humanize(data[key]));
       }else{
-        if(key !== 'privatekey-rsa' && key !== 'privatekey-secp256k1') {
+        if(key !== 'privatekey-rsa' && key !== 'privatekey-secp256k1' &&
+                key !== 'publickey-secp256k1') {
           editor.setValue("{}");
         }
       }
