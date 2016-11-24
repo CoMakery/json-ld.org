@@ -855,11 +855,30 @@
           [input['@context'], 'https://w3id.org/security/v1'];
       }
 
+      var signed = null;
       promise = jsigs.promises.sign(input, {
         privateKeyWif: pkey,
         algorithm: 'sha256-ecdsa-secp256k1-2016',
         domain: 'example.com',
         creator: 'sha256-ecdsa-secp256k1-public-key:' + new bitcoreMessage.Bitcore.PrivateKey(pkey).toPublicKey()
+      }).then( function(_signed) {
+        signed = _signed;
+        var verificationKey = $('#publickey-secp256k1').val();
+        var publicKeyBtcOwner = {
+          id: 'https://example.com/i/alice',
+          publicKey: [verificationKey]
+        };
+        return jsigs.promises.verify(signed, {
+          publicKey: verificationKey,
+          publicKeyOwner: publicKeyBtcOwner
+        })
+      }).then( function(verification) {
+        console.log(verification);
+        // set secp256k1-verification.innerHTML to result
+        return signed;
+      }).catch( function(e) {
+        console.error(e.stack)
+        throw(e)
       });
     }
     else {
